@@ -1,0 +1,23 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.willnewby/simpletel",
+  "title": "simpletel",
+  "description": "Query your simpletel OpenTelemetry traces and account usage from a coding agent.",
+  "version": "20261010.0405.59-8f36b35",
+  "repository": {
+    "url": "https://github.com/willnewby/simpletel-mcp",
+    "source": "github",
+    "id": "1412757219"
+  },
+  "websiteUrl": "https://simpletel.dev",
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "ghcr.io/willnewby/simpletel-mcp:20261010.0405.59-8f36b35",
+      "transport": {
+        "type": "stdio"
+      },
+      "runtimeHint": "docker"
+    }
+  ]
+}
