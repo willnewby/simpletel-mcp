@@ -146,13 +146,20 @@ the config file or through environment variables (recommended — nothing is
 written to the image).
 
 Mount an existing config file (read-only). The image runs as the distroless
-`nonroot` user, whose home is `/home/nonroot`:
+`nonroot` user (uid/gid `65532`) with `HOME=/home/nonroot`, so the CLI's default
+config path inside the container is `/home/nonroot/.simpletel/config.toml`.
+Because `simpletel login` writes that file mode `0600` for you, run the
+container as the file's owner so it stays readable:
 
 ```sh
 docker run -i --rm \
+  --user "$(id -u):$(id -g)" \
   -v "$HOME/.simpletel/config.toml:/home/nonroot/.simpletel/config.toml:ro" \
   ghcr.io/willnewby/simpletel-mcp:latest
 ```
+
+(Passing the connection through `-e` below avoids the ownership question
+entirely and is the recommended path.)
 
 Or pass everything through the environment:
 

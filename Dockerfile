@@ -28,4 +28,9 @@ RUN /out/simpletel --version
 FROM gcr.io/distroless/static-debian12
 LABEL io.modelcontextprotocol.server.name="io.github.willnewby/simpletel"
 COPY --from=builder /out/simpletel /simpletel
+# The distroless static image ships a `nonroot` user (uid/gid 65532) but
+# defaults to root; run unprivileged. HOME is set explicitly so the CLI
+# resolves its default config path to /home/nonroot/.simpletel/config.toml.
+USER nonroot:nonroot
+ENV HOME=/home/nonroot
 ENTRYPOINT ["/simpletel","mcp"]
